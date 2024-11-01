@@ -9,8 +9,8 @@ config :test_task, TestTask.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "yolo_test_task_test#{System.get_env("MIX_TEST_PARTITION")}",
-  port: 5432,
+  database: "hub_test_task_test#{System.get_env("MIX_TEST_PARTITION")}",
+  port: 5433,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 

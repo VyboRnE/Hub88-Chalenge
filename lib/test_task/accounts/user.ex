@@ -1,4 +1,7 @@
 defmodule TestTask.Accounts.User do
+  @moduledoc """
+  User balance schema.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

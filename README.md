@@ -32,7 +32,8 @@ This project implements a Wallet API that allows users to check their balance, p
   ```json
   {
     "user": "username"
-  }```
+  }
+  ```
 
 ### Transaction Bet
 
@@ -45,7 +46,8 @@ This project implements a Wallet API that allows users to check their balance, p
     "amount": 100,
     "currency": "EUR",
     "transaction_uuid": "uuid",
-  }```
+  }
+  ```
 
 ### Transaction Win
 
@@ -59,7 +61,8 @@ This project implements a Wallet API that allows users to check their balance, p
     "currency": "EUR",
     "transaction_uuid": "uuid",
     "reference_uuid": "reference_uuid"
-  }```
+  }
+  ```
 
 ### Testing
 To run the test, use: `mix test` command.
