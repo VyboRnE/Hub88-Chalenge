@@ -18,9 +18,10 @@ This project implements a Wallet API that allows users to check their balance, p
 ## Installation and testing
 
 1. **Clone the Repository**
-2. **Run `mix setup` to install and setup dependencies**
-3. **Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`**
-4. **Test API through Postman (use http://localhost:4000/api endpoint)**
+2. **Start database by running `docker compose up -d` from program folder**
+3. **Run `mix setup` to install and setup dependencies**
+4. **Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`**
+5. **Test API through Postman (use http://localhost:4000/api endpoint)**
 
 ## API Endpoints
 
