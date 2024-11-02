@@ -50,20 +50,20 @@ defmodule TestTaskWeb.WalletControllerTest do
     test "successful bet decreases balance", %{conn: conn, user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_1"
       }
       conn = conn |> basic_auth("admin", "admin")
       conn = post(conn, ~p"/api/transaction/bet", attrs)
       assert json_response(conn, 200)["status"] == "OK"
-      assert Transactions.get_balance(user.username).balance == 900
+      assert Transactions.get_balance(user.username).balance == 90000000
     end
 
     test "returns error when insufficient balance", %{conn: conn, user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 2000,
+        "amount" => 200000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_2"
       }
@@ -75,7 +75,7 @@ defmodule TestTaskWeb.WalletControllerTest do
     test "returns error for duplicate transaction", %{conn: conn, user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "duplicate_uuid"
       }
@@ -94,7 +94,7 @@ defmodule TestTaskWeb.WalletControllerTest do
       # First, place a bet
       bet_attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_3"
       }
@@ -103,7 +103,7 @@ defmodule TestTaskWeb.WalletControllerTest do
 
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_1",
         "reference_transaction_uuid" => "bet_uuid_3"
@@ -111,14 +111,14 @@ defmodule TestTaskWeb.WalletControllerTest do
       conn = conn |> basic_auth("admin", "admin")
       conn = post(conn, ~p"/api/transaction/win", win_attrs)
       assert json_response(conn, 200)["status"] == "OK"
-      assert Transactions.get_balance(user.username).balance == 1050
+      assert Transactions.get_balance(user.username).balance == 105000000
     end
 
     test "returns error for closed bet", %{conn: conn, user: user} do
       # First, place a bet and close it
       bet_attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_4"
       }
@@ -128,7 +128,7 @@ defmodule TestTaskWeb.WalletControllerTest do
 
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_2",
         "reference_transaction_uuid" => "bet_uuid_4"
@@ -141,7 +141,7 @@ defmodule TestTaskWeb.WalletControllerTest do
     test "returns error for non-existing transaction", %{conn: conn, user: user} do
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_3",
         "reference_transaction_uuid" => "non_existent_uuid"
@@ -154,7 +154,7 @@ defmodule TestTaskWeb.WalletControllerTest do
     test "returns error when user does not exist", %{conn: conn} do
       win_attrs = %{
         "user" => "non_existent_user",
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_4",
         "reference_transaction_uuid" => "reference_uuid"

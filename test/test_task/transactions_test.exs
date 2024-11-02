@@ -21,13 +21,13 @@ defmodule TestTask.TransactionsTest do
 
   describe "get_balance/1" do
     test "returns balance for existing user" do
-      assert Transactions.get_balance("test_user").balance == 1000
+      assert Transactions.get_balance("test_user").balance == 100000000
     end
 
     test "creates a new user with default balance when user does not exist" do
       assert new_user = Transactions.get_balance("new_user")
       assert new_user.username == "new_user"
-      assert new_user.balance == 1000
+      assert new_user.balance == 100000000
     end
   end
 
@@ -35,19 +35,19 @@ defmodule TestTask.TransactionsTest do
     test "successful bet decreases balance", %{user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "unique_uuid_1"
       }
 
       assert {:ok, _} = Transactions.bet(attrs)
-      assert Transactions.get_balance(user.username).balance == 900
+      assert Transactions.get_balance(user.username).balance == 90000000
     end
 
     test "returns error when insufficient balance", %{user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 2000,
+        "amount" => 200000000,
         "currency" => "EUR",
         "transaction_uuid" => "unique_uuid_2"
       }
@@ -58,7 +58,7 @@ defmodule TestTask.TransactionsTest do
     test "returns error when duplicate transaction", %{user: user} do
       attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "duplicate_uuid"
       }
@@ -70,7 +70,7 @@ defmodule TestTask.TransactionsTest do
     test "returns error when user does not exist" do
       attrs = %{
         "user" => "non_existent_user",
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "unique_uuid_3"
       }
@@ -84,7 +84,7 @@ defmodule TestTask.TransactionsTest do
       # First, we need to place a bet
       bet_attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_1"
       }
@@ -93,21 +93,21 @@ defmodule TestTask.TransactionsTest do
 
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_1",
         "reference_transaction_uuid" => "bet_uuid_1"
       }
 
       assert {:ok, _} = Transactions.win(win_attrs)
-      assert Transactions.get_balance(user.username).balance == 1050
+      assert Transactions.get_balance(user.username).balance == 105000000
     end
 
     test "returns error when winning on a closed bet", %{user: user} do
       # Create and close a transaction
       bet_attrs = %{
         "user" => user.username,
-        "amount" => 100,
+        "amount" => 10000000,
         "currency" => "EUR",
         "transaction_uuid" => "bet_uuid_2"
       }
@@ -117,7 +117,7 @@ defmodule TestTask.TransactionsTest do
 
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_2",
         "reference_transaction_uuid" => "bet_uuid_2"
@@ -129,7 +129,7 @@ defmodule TestTask.TransactionsTest do
     test "returns error when transaction does not exist", %{user: user} do
       win_attrs = %{
         "user" => user.username,
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_3",
         "reference_transaction_uuid" => "non_existent_uuid"
@@ -141,7 +141,7 @@ defmodule TestTask.TransactionsTest do
     test "returns error when user does not exist" do
       win_attrs = %{
         "user" => "non_existent_user",
-        "amount" => 150,
+        "amount" => 15000000,
         "currency" => "EUR",
         "transaction_uuid" => "win_uuid_4",
         "reference_transaction_uuid" => "reference_uuid"

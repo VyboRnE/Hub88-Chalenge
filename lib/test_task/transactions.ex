@@ -38,7 +38,7 @@ defmodule TestTask.Transactions do
   defp check_if_exist(user, _), do: user
 
   def create_balance(username) do
-    attrs = %{username: username, balance: 1000, currency: "EUR"}
+    attrs = %{username: username, balance: 100000000, currency: "EUR"}
 
     %User{}
     |> User.changeset(attrs)
